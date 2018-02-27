@@ -4,7 +4,7 @@ This project contains an example Sentry integration with Spring Boot. It uses
 the default `log4j` logging framework to send log level `WARN` and above
 to sentry.
 
-## Installation and Configuration:
+## Installation and Configuration
 1. Add the Sentry Log4j2 package to the [pom.xml](https://github.com/sentry-demos/spring-boot-log4j2/blob/master/pom.xml#L27-L31) file.
 2. Add the logger configuration file ([log4j2.xml](https://github.com/sentry-demos/spring-boot-log4j2/blob/master/src/main/resources/log4j2.xml))
 
