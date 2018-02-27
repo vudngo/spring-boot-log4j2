@@ -25,8 +25,9 @@ public class Application {
     String home() {
         ThreadContext.put("customKey1", "customValue1");
         ThreadContext.put("customKey2", "customValue2");
+        logger.warn("Warn message"); //warning message that will be sent to Sentry
 
-        int x = 1 / 0; // uncaught exception!
+        int x = 1 / 0; //uncaught exception that will be sent to Sentry
 
         return "Hello World";
     }

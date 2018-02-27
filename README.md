@@ -22,4 +22,4 @@ Now, visit `http://localhost:8080/` in your browser and a `WARN` and
 `ERROR` message should be sent to the Sentry server you point to in your 
 `SENTRY_DSN`.
 
-View full documentation of Sentry's Log4j2 integration [here](https://docs.sentry.io/clients/java/modules/logback/). 
+View full documentation of Sentry's Log4j2 integration [here](https://docs.sentry.io/clients/java/modules/log4j2/). 

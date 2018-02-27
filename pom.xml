@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>io.sentry.example</groupId>
-	<artifactId>sentry-spring-boot-logback-example</artifactId>
+	<artifactId>sentry-spring-boot-log4j2-example</artifactId>
 	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
-	<name>Sentry Spring-Boot With Logback Example</name>
+	<name>Sentry Spring-Boot With Log4j2 Example</name>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
