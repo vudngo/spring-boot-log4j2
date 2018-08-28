@@ -35,7 +35,7 @@ public class Application {
 
     private void handledError() {
         try {
-            int example = 1 / 0;
+            int example = 1/0;
         } catch (Exception e) {
             // caught exception that will be sent to Sentry
             logger.error("Caught exception!", e);
