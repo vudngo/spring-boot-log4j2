@@ -17,4 +17,5 @@ associate_commits:
 	sentry-cli releases -o $(SENTRY_ORG) -p $(SENTRY_PROJECT) set-commits --auto $(VERSION)
 
 run_jar:
-	mvn package && java -agentpath:libsentry_agent.dylib -Drelease=$(VERSION) -jar target/sentry-spring-boot-log4j2-example-0.0.1.jar
+	mvn clean package && \
+	 java -agentpath:libsentry_agent.dylib -Drelease=$(VERSION) -jar target/sentry-spring-boot-log4j2-example-0.0.1.jar
