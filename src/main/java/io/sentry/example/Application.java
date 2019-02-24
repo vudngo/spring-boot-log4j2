@@ -1,9 +1,12 @@
 package io.sentry.example;
 
+import io.sentry.Sentry;
 import org.apache.logging.log4j.ThreadContext;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.apache.logging.log4j.LogManager;
@@ -38,15 +41,25 @@ public class Application {
 
     @PostMapping(value="/checkout", consumes = "application/json")
     @ResponseBody
-    public String checkoutCart(@RequestHeader(name = "X-Session-ID", required = true) String sessionId,
-                               @RequestHeader(name = "X-Transaction-ID", required = true) String transactionId,
-                               @RequestBody Order order) {
-        ThreadContext.put("session_id", sessionId);
-        ThreadContext.put("transaction_id", transactionId);
+    public ResponseEntity checkoutCart(@RequestHeader(name = "X-Session-ID", required = true) String sessionId,
+                                       @RequestHeader(name = "X-Transaction-ID", required = true) String transactionId,
+                                       @RequestBody Order order) {
+        try {
+            // set session and transaction id as tags
+            ThreadContext.put("session_id", sessionId);
+            ThreadContext.put("transaction_id", transactionId);
 
-        logger.info("Processing order for: " + order.getEmail());
-        checkout(order.getCart());
-        return "Success";
+            // perform checkout
+            logger.info("Processing order for: " + order.getEmail());
+            checkout(order.getCart());
+        } catch (Exception e) {
+            // log error + return 500, if exception
+            logger.error("Caught exception!", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Checkout error");
+        }
+
+        // return 200 if checkout was successful
+        return ResponseEntity.status(HttpStatus.OK).body("Success");
     }
 
     @RequestMapping("/capture-message")
@@ -81,6 +94,8 @@ public class Application {
     }
 
     public static void main(String[] args) {
+        Sentry.init();
+
         inventory.put("wrench", 0);
         inventory.put("nails", 0);
         inventory.put("hammer", 1);
