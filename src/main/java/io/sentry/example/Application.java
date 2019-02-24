@@ -1,7 +1,6 @@
 package io.sentry.example;
 
 import org.apache.logging.log4j.ThreadContext;
-import org.apache.tomcat.jni.Error;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -37,41 +36,47 @@ public class Application {
         inventory = tempInventory;
     }
 
-    @PostMapping(value="/checkout", headers="Accept=application/json")
+    @PostMapping(value="/checkout", consumes = "application/json")
     @ResponseBody
-    public String checkoutCart(@RequestBody Order order){
+    public String checkoutCart(@RequestHeader(name = "X-Session-ID", required = true) String sessionId,
+                               @RequestHeader(name = "X-Transaction-ID", required = true) String transactionId,
+                               @RequestBody Order order) {
+        ThreadContext.put("session_id", sessionId);
+        ThreadContext.put("transaction_id", transactionId);
+
         logger.info("Processing order for: " + order.getEmail());
         checkout(order.getCart());
         return "Success";
     }
 
-    @RequestMapping("/")
+    @RequestMapping("/capture-message")
     @ResponseBody
-    String home() {
+    String captureMessage() {
+        String someLocalVariable = "stack locals";
         ThreadContext.put("customKey1", "customValue1");
-        ThreadContext.put("customKey2", "customValue2");
 
         logger.debug("Debug message");
         logger.info("Info message");
         logger.warn("Warn message"); // warning message that will be sent to Sentry
-
-        handledError();
-        unhandledError();
-
-        return "Hello World";
+        return "Success";
     }
 
-    // changing stack trace: attempt 1
-    private void handledError() {
+    @RequestMapping("/handled")
+    @ResponseBody
+    String handledError() {
+        String someLocalVariable = "stack locals";
         try {
             int example = 1 / 0;
         } catch (Exception e) {
             // caught exception that will be sent to Sentry
             logger.error("Caught exception!", e);
         }
+        return "Success";
     }
 
-    private void unhandledError() {
+    @RequestMapping("/unhandled")
+    @ResponseBody
+    String unhandledError() {
         throw new RuntimeException("Unhandled exception!");
     }
 
