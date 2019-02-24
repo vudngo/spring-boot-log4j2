@@ -54,7 +54,7 @@ public class Application {
             checkout(order.getCart());
         } catch (Exception e) {
             // log error + return 500, if exception
-            logger.error("Caught exception!", e);
+            logger.error("Error while checking out", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Checkout error");
         }
 
