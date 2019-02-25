@@ -19,4 +19,7 @@ Now, visit `http://localhost:8080/handled` in your browser and an error with ful
 
 # Documentaion:
 - Log4j SDK -> https://docs.sentry.io/clients/java/modules/log4j2/
-- Java Agent -> ttps://docs.sentry.io/clients/java/agent/
+- Java Agent -> https://docs.sentry.io/clients/java/agent/
+
+# GIF
+TODO
