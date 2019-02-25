@@ -16,9 +16,7 @@ The example application can be started as follows:
     make
 ```
 
-Now, visit `http://localhost:8080/capture-message` in your browser and a `WARN` and
-`ERROR` message should be sent to the Sentry server you point to in your 
-`SENTRY_DSN`.
+Now, visit `http://localhost:8080/handled` in your browser and an error with full context (including stack locals / variasble values) should be sent to Sentry.
 
 # Documentaion:
 - Log4j SDK -> https://docs.sentry.io/clients/java/modules/log4j2/
