@@ -22,4 +22,4 @@ Now, visit `http://localhost:8080/handled` in your browser and an error with ful
 - Java Agent -> https://docs.sentry.io/clients/java/agent/
 
 # GIF
-TODO
+![Alt Text](java-spring-boot-log4j-agent-small.gif)
