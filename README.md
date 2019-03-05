@@ -6,9 +6,9 @@ It uses the default `log4j` logging framework to send log level `WARN` and above
 ## Installation and Configuration
 
 1. Add the Sentry Log4j2 package to the [pom.xml](https://github.com/sentry-demos/spring-boot-log4j2/blob/master/pom.xml#L27-L31) file.
-2. Add the logger configuration file ([log4j2.xml](https://github.com/sentry-demos/spring-boot-log4j2/blob/master/src/main/resources/log4j2.xml))
-1. Specify DSN in [sentry.properties](https://github.com/sentry-demos/java-spring-boot-log4j/blob/master/sentry.properties#L8) 
-2. `SENTRY_AUTH_TOKEN` must be set as ENV var (for consumption by `sentry-cli` in Makefile)
+2. Specify DSN in [sentry.properties](https://github.com/sentry-demos/java-spring-boot-log4j/blob/master/sentry.properties#L8) 
+3. `SENTRY_AUTH_TOKEN` must be set as ENV var (for consumption by `sentry-cli` in Makefile)
+4. Add the logger configuration file ([log4j2.xml](https://github.com/sentry-demos/spring-boot-log4j2/blob/master/src/main/resources/log4j2.xml))
 
 The example application can be started as follows:
 ```
