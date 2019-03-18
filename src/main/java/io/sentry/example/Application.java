@@ -79,7 +79,7 @@ public class Application {
     String handledError() {
         String someLocalVariable = "stack locals";
         try {
-            int example = 1 / 1;
+            int example = 1 / 0;
         } catch (Exception e) {
             // caught exception that will be sent to Sentry
             logger.error("Caught exception!", e);
